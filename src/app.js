@@ -4,8 +4,23 @@ const express = require('express')
 const app = express()
 const publicDirectoryPath = path.join(__dirname, '../public')
 
+app.set('view engine', 'hbs')
 //for customoizing server - root of the sites
 app.use(express.static(publicDirectoryPath))
+
+app.get('', (req, res) => {
+	res.render('index', {
+		title : 'Weather',	
+		name : 'Andrew Mead'
+	})
+})
+
+app.get('/about', (req, res) => {
+	res.render('about', {
+		title : 'About me',
+		name : 'Andrew Mead'
+	})
+}) 
 
 app.get('/weather', (req, res) => {
 	res.send({
