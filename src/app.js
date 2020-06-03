@@ -3,11 +3,21 @@ const express = require('express')
 const app = express()
 
 app.get('', (req , res) => {
-	res.send('Hello Express!') 
+	res.send('<h1> Weather </h1>') 
 })
 
-app.get('/help', (req, res) => {
-	res.send('Help Page')
+app.get('/help', (req, res) => {   
+	//sending array of object
+	res.send([{
+		name : 'Andrew'
+	}, {
+		name : 'Sarah'
+	}])
+	// //sending an object
+	// res.send({
+	// 	name : 'Andrew',
+	// 	age : 27
+	// })
 })
 
 app.get('/about' , (req, res) => {
