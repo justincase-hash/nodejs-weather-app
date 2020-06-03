@@ -7,18 +7,11 @@ const publicDirectoryPath = path.join(__dirname, '../public')
 //for customoizing server - root of the sites
 app.use(express.static(publicDirectoryPath))
 
-app.get('/help', (req, res) => {   
-	//sending array of object
-	res.send([{
-		name : 'Andrew'
-	}, {
-		name : 'Sarah'
-	}])
-})
-
-app.get('/about' , (req, res) => {
-	res.send('<h1> About page </h1>')
-}) 
+// Goal : create two more html files 
+// 1. Create a html page for about with "About" title
+// 2. Create a html page for help with "Help" title
+// 3. Remove the old route handlers for both 
+// 4. Visit both in the browser to test your work 
 
 app.get('/weather', (req, res) => {
 	res.send({
