@@ -1,10 +1,11 @@
+const path = require('path')
 const express = require('express')
 
 const app = express()
+const publicDirectoryPath = path.join(__dirname, '../public')
 
-app.get('', (req , res) => {
-	res.send('<h1> Weather </h1>') 
-})
+//for customoizing server - root of the sites
+app.use(express.static(publicDirectoryPath))
 
 app.get('/help', (req, res) => {   
 	//sending array of object
@@ -14,12 +15,6 @@ app.get('/help', (req, res) => {
 		name : 'Sarah'
 	}])
 })
-// Goal : Update routes 
-// 1. Setup about route to render a title with HTML 
-// 2. Setup a weather route to send back JSON  
-// 		-object with forecast and location string
-// 3. Test your work by visiting both in the browser 
-
 
 app.get('/about' , (req, res) => {
 	res.send('<h1> About page </h1>')
