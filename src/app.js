@@ -13,19 +13,23 @@ app.get('/help', (req, res) => {
 	}, {
 		name : 'Sarah'
 	}])
-	// //sending an object
-	// res.send({
-	// 	name : 'Andrew',
-	// 	age : 27
-	// })
 })
+// Goal : Update routes 
+// 1. Setup about route to render a title with HTML 
+// 2. Setup a weather route to send back JSON  
+// 		-object with forecast and location string
+// 3. Test your work by visiting both in the browser 
+
 
 app.get('/about' , (req, res) => {
-	res.send('About page')
+	res.send('<h1> About page </h1>')
 }) 
 
 app.get('/weather', (req, res) => {
-	res.send('Weather page')
+	res.send({
+		'forecast' : 'It is snowing',
+		'location' : 'Philadelphia' 
+	})
 })
 
 app.listen(3000, () => {
@@ -33,7 +37,3 @@ app.listen(3000, () => {
 })  
 
 
-// Goal : Setup two new routes 
-// 1. Set up an about route and render a page titile 
-// 2. Set up a weather route and render a page titile 
-// 3. Test your work by visiting both in the browser
