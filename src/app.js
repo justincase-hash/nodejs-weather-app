@@ -47,6 +47,19 @@ app.get('/weather', (req, res) => {
 	})
 }) 
 
+app.get('/products', (req, res) => {
+	if (!req.query.search) {
+		return res.send({
+			error : 'You must provide a search term'
+		})
+	} 
+
+	console.log(req.query.search) 
+	res.send({
+		products : []
+	})
+})
+
 app.get('/help/*', (req, res) => {
 	res.render('404', {
 		title: '404',
@@ -62,14 +75,6 @@ app.get('*', (req, res ) => {
 		errorMessage : 'Page not found'
 	})
 })	 
-
-// Goal : Create and render a 404 page with handle bars 
-// 1. Set up the template to render the header and footer 
-// 2. Setup the template to render an error message in 5 paragraph
-// 3. Render the template for both rotues 
-// 		- Page not found 
-// 		- Help article not found 
-// 4. Test your Worker. Visit /what and /help/units 
 
 
 app.listen(3000, () => {
