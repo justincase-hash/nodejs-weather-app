@@ -1,28 +1,32 @@
 console.log('Client Side Javascript File is loaded!')
 
-fetch('http://puzzle.mead.io/puzzle').then( (response) => { 
-	 // this function will run when json data has arrived & been parsed
-	response.json().then( (data) => {
-			console.log(data)
+const weatherForm = document.querySelector('form') 
+const search = document.querySelector('input')
+
+weatherForm.addEventListener('submit', (e) => { 
+	e.preventDefault()	
+	
+	const location  = search.value 
+	
+	fetch('http://127.0.0.1:3000/weather?address='+ location).then( ( response ) => {
+		response.json().then( ( data ) => {
+				if	( data.error ){
+					console.log(data.error)
+				} else {
+					console.log(data.location)
+					console.log(data.forecast)
+				}
+		})
 	})
-})
 
-fetch('http://127.0.0.1:3000/weather?address=boston').then( ( response ) => {
-	response.json().then( ( data ) => {
-			if	( data.error ){
-				console.log(data.error)
-			} else {
-				console.log(data.location)
-				console.log(data.forecast)
-			}
-	})
-})
+}) 
+
+// Goal : Use input value to get weather 
+
+// 1. Migrate fetch call into the submit call back
+// 2. Use the search test as the address query string value 
+// 3. Submit the form with a valid and invalid value to test
 
 
-// Goal : Fetch weather 
 
-// 1. Set up a call to fetch to fetch weather for boston
-// 2. Get the parse JSON Parameter 
-//        - if error property , print error 
-//         -if no error property, print location and forecast 
-// 3. Refresh the browser and test your work
+
