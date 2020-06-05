@@ -1,6 +1,8 @@
 const path = require('path')
 const express = require('express')
-const hbs = require('hbs')
+const hbs = require('hbs') 
+const geocode = require('./utils/geocode') 
+const forecast = require('./utils/forecast')
 
 const app = express() 
 
@@ -46,22 +48,34 @@ app.get('/weather', (req, res) => {
 			error : 'You must provide an address'
 		})
 	}
+	geocode(req.query.address, (error , {latitude , longitude , location} = { } ) => {
+		if (error) {
+			return res.send({
+				   error
+			})
+		} 
+		forecast(latitude, longitude, (error , forecastData ) => {
+			if (error) {
+				return res.send({
+				   error
+				})
+			}
 
-	res.send({
-		'forecast' : 'It is snowing',
-		'location' : 'Philadephia',
-		'address' : req.query.address 
-	})
+			res.send({
+				'forecast' : forecastData,
+				 location,
+				'address' : req.query.address 
+			})
+		})
+	}) 	
+
 })  
 
-
-
-// Goal : Update weather end point to accept address 
-
-// 1. No address? send back an error message 
-// 2. address? send back the statin JSON
-// 3.	Add address property onto JSON which returns the provided address 
-// 4.  Test /weather and /weather?address=philadelphia
+// Goal : Wire up /weather  
+// 1. Require geocode/forecast into app.js 
+// 2. Use the address to geocode
+// 3. Use the coordinates to get forecast
+// 4. Send back the real forecast and location
 
 
 app.get('/products', (req, res) => {
