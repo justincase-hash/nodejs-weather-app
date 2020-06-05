@@ -41,11 +41,28 @@ app.get('/help', (req, res) => {
 })
 
 app.get('/weather', (req, res) => {
+	if( !req.query.address) {
+		return res.send({
+			error : 'You must provide an address'
+		})
+	}
+
 	res.send({
 		'forecast' : 'It is snowing',
-		'location' : 'Philadelphia' 
+		'location' : 'Philadephia',
+		'address' : req.query.address 
 	})
-}) 
+})  
+
+
+
+// Goal : Update weather end point to accept address 
+
+// 1. No address? send back an error message 
+// 2. address? send back the statin JSON
+// 3.	Add address property onto JSON which returns the provided address 
+// 4.  Test /weather and /weather?address=philadelphia
+
 
 app.get('/products', (req, res) => {
 	if (!req.query.search) {
