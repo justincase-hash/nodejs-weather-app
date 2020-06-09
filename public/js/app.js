@@ -6,13 +6,6 @@ const messageOne = document.querySelector('#message-1')
 const messageTwo = document.querySelector('#message-2')
 
 
-// Goal : Render conent to paragraphs 
-// 1. Select the second messsage p from JavaScript 
-// 2. Just before fetch, render loading message and empty p 
-// 3. If error , render error 
-// 4. if no error , render location and forecast
-// 5. Test your work ! search for errors and for valid locations 
-
 weatherForm.addEventListener('submit', (e) => { 
 	e.preventDefault()	
 	
